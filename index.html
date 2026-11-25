@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>அலகு 4: பொருளாதார முறைமைகளும் தொடர்புகளும்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap">
+<style>
+:root{color-scheme:dark;--ink:#FFF4E0;--gold:#F5B841;--teal:#5EEAD4;--card:#12363A}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{font-family:'Noto Sans Tamil',system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 10%,#1B5E4B 0,transparent 45%),radial-gradient(circle at 90% 95%,#8A5A12 0,transparent 45%),#0C1B24;line-height:1.4}
+#cv{position:absolute;left:50%;top:50%;transform-origin:0 0;overflow:hidden}
+#app{width:100%;height:100%;display:flex;flex-direction:column}
+#bar{position:absolute;left:0;top:0;height:8px;background:linear-gradient(90deg,var(--gold),var(--teal));transition:width .4s;z-index:3}
+header{padding:24px 40px 4px;text-align:center}
+.unit{display:inline-block;font-size:24px;color:#0C1B24;background:var(--gold);font-weight:700;border-radius:999px;padding:2px 22px}
+h1{font-size:50px;margin:6px 0 0;line-height:1.25;animation:rise .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+@keyframes pop{from{opacity:0;transform:scale(.7)}}
+@keyframes fade{from{opacity:0}}
+@keyframes float{50%{transform:translateY(-8px)}}
+#stage{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:4px 40px}
+.grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:center;max-width:1840px}
+.tile{--c:#F5B841;font:inherit;color:var(--ink);cursor:pointer;width:440px;min-height:150px;padding:16px 22px;border-radius:26px;border:3px solid var(--c);background:linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:32px;font-weight:700;box-shadow:0 0 28px -8px var(--c);animation:pop .5s both;animation-delay:var(--d);transition:transform .2s}
+.tile .ic{font-size:52px;line-height:1.1;animation:float 3s ease-in-out infinite}
+.tile:hover{transform:translateY(-5px) scale(1.04)}
+.tile.seen{background:linear-gradient(color-mix(in srgb,var(--c) 26%,transparent),color-mix(in srgb,var(--c) 26%,transparent)),var(--card)}
+.tile.seen::after{content:"✔";font-size:24px;color:var(--c)}
+.tile small{display:block;font-size:22px;font-weight:400;line-height:1.3;opacity:.92}
+.big{width:560px;min-height:230px;font-size:38px}.big .ic{font-size:72px}
+.md{width:385px;min-height:210px;font-size:30px}.fl{width:500px;min-height:250px;font-size:34px}.fl .ic{font-size:70px}
+.tm{width:340px;min-height:230px;font-size:30px}
+.sep{font-size:58px;font-weight:700;color:var(--gold);animation:pop .5s both;animation-delay:var(--d)}
+.br{flex-basis:100%;height:0}
+.mm{position:relative;width:1800px;height:720px}
+.mm svg{position:absolute;left:0;top:0;width:1800px;height:720px}
+.mm path{fill:none;stroke-width:4;opacity:.55;animation:fade .8s both}
+.mm .tile,.mm .nd{position:absolute;translate:-50% -50%;min-height:0;height:auto;padding:10px 16px;border-radius:22px;font-size:25px;gap:2px;flex-direction:column}
+.mm .nd{border:3px solid var(--c);background:linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12)),var(--card);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;animation:pop .5s both;animation-delay:var(--d)}
+.mm .cn{font-size:34px;padding:18px 24px;border-width:5px;border-radius:40px}
+.mm .tile small{font-size:20px}
+table{border-collapse:separate;border-spacing:0 9px;width:1800px;font-size:26px;table-layout:fixed}
+th{background:var(--gold);color:#0C1B24;padding:12px 18px;text-align:left;font-size:28px}
+th:first-child{border-radius:16px 0 0 16px}th:last-child{border-radius:0 16px 16px 0}
+td{background:rgba(255,255,255,.09);padding:11px 18px;vertical-align:middle}
+td:first-child{border-radius:16px 0 0 16px;font-weight:700;color:var(--teal)}td:last-child{border-radius:0 16px 16px 0}
+table.pair td:first-child{color:inherit;font-weight:400}
+table.pair td{font-size:28px;padding:14px 22px}
+table.ctr td,table.ctr th{text-align:center;font-size:30px;padding:20px 12px}
+table.ctr td:first-child{text-align:left}
+td.has{background:rgba(74,222,128,.22)}
+tbody tr{cursor:pointer;animation:fade .5s both;animation-delay:var(--d)}
+tbody tr:hover td{background:rgba(255,255,255,.2)}
+tbody tr:hover td.has{background:rgba(74,222,128,.35)}
+tbody tr.seen td:first-child::before{content:"✔ ";color:var(--gold)}
+#hint{text-align:center;font-size:26px;opacity:.85}
+nav{display:flex;align-items:center;justify-content:center;gap:22px;padding:8px 20px 18px}
+nav button{font:inherit;font-size:30px;font-weight:700;border:0;border-radius:999px;padding:10px 44px;background:var(--gold);color:#0C1B24;cursor:pointer}
+nav button:disabled{opacity:.35;cursor:default}
+#cnt{font-size:26px;min-width:90px;text-align:center;opacity:.9}
+#dots{display:flex;gap:12px;align-items:center}
+#dots i{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer}
+#dots i.on{background:var(--gold);transform:scale(1.45)}
+#pop{position:absolute;inset:0;background:rgba(2,12,14,.8);display:none;align-items:center;justify-content:center;padding:24px;z-index:5}
+#pop.show{display:flex}
+#card{--c:#F5B841;position:relative;width:1250px;max-width:100%;max-height:100%;overflow:auto;background:#12363A;border:5px solid var(--c);border-radius:36px;padding:34px 46px 30px;text-align:center;animation:pop .35s both;box-shadow:0 0 80px -10px var(--c)}
+#card .big-ic{font-size:84px;line-height:1.1}
+#card h2{margin:4px 0 12px;font-size:48px;color:var(--c);line-height:1.3}
+#card ul{list-style:none;margin:0;padding:0;text-align:left;font-size:36px}
+#card li{padding:10px 22px;margin:9px 0;border-radius:18px;background:rgba(255,255,255,.09);animation:rise .4s both}
+#card.sm ul{font-size:30px}#card.sm li{padding:7px 20px;margin:7px 0}
+#card.xs ul{font-size:26px}#card.xs li{padding:5px 18px;margin:5px 0}
+#x{position:absolute;top:14px;right:22px;font:inherit;font-size:44px;border:0;background:none;color:var(--ink);cursor:pointer}
+</style>
+</head>
+<body>
+<div id="cv">
+<div id="bar"></div>
+<div id="app">
+<header><div class="unit">💹 அலகு 4 · பொருளாதார முறைமைகளும் தொடர்புகளும்</div><h1 id="t"></h1></header>
+<div id="stage"><div class="grid" id="g"></div></div>
+<div id="hint"></div>
+<nav><button id="pv" aria-label="முந்தையது">◀</button><span id="cnt"></span><div id="dots"></div><button id="nx" aria-label="அடுத்தது">▶</button></nav>
+</div>
+<div id="pop"><div id="card"><button id="x" aria-label="மூடு">✕</button><div class="big-ic" id="ci"></div><h2 id="ch"></h2><ul id="cl"></ul></div></div>
+</div>
+<script>
+var COL=['#F5B841','#5EEAD4','#FF6B8B','#A99BFF','#4ADE80','#FF9F5A'];
+var S=[
+{t:'1. தேவைகள், விருப்பங்கள், வளப்பற்றாக்குறை',cls:'fl',sep:{0:'VS',1:'➜'},it:[
+['🥫','தேவைகள் (Needs)',['மனிதன் உயிர்வாழ்வதற்கு அத்தியாவசியமான அடிப்படை அம்சங்கள். இவை எல்லைக்குட்பட்டவை.','எ.கா: உணவு, உடை, உறைவிடம், கல்வி, சுகாதாரம்'],'எல்லைக்குட்பட்டவை'],
+['🎁','விருப்பங்கள் (Wants)',['தேவைகளை நிறைவேற்றிக் கொள்வதற்காக மனிதன் விரும்பும் பல்வேறு வழிகள். இவை எல்லையற்றவை / வரம்பற்றவை.','எ.கா: சுவையான உணவு வகைகள், ஆடம்பர வீடுகள், நவீன வாகனங்கள்'],'எல்லையற்றவை'],
+['⚠️','வளப்பற்றாக்குறை (Scarcity)',['மனிதனின் விருப்பங்கள் வரம்பற்றதாக இருக்கும் அதேவேளை, அவற்றை நிறைவேற்றுவதற்குரிய வளங்கள் வரையறுக்கப்பட்டவையாக (பற்றாக்குறையாக) காணப்படுகின்றன.'],'விருப்பங்கள் வரம்பற்றவை · வளங்கள் வரையறுக்கப்பட்டவை']]},
+{t:'1. மூன்று அடிப்படைப் பொருளாதாரப் பிரச்சினைகள்',cls:'fl',it:[
+['📦','1. எதனை, எவ்வளவை உற்பத்தி செய்வது?',['கிடைக்கக்கூடிய வரையறுக்கப்பட்ட வளங்களைக் கொண்டு எந்தெந்தப் பண்டங்களையும் சேவைகளையும் எவ்வளவில் உற்பத்தி செய்வது என்பதைத் தீர்மானித்தல்.'],'What & How much to produce?'],
+['🛠️','2. எவ்வாறு உற்பத்தி செய்வது?',['உற்பத்தியை மேற்கொள்வதற்கு எந்தத் தொழில்நுட்பத்தைப் பயன்படுத்துவது (உழைப்புச் செறிவுத் தொழில்நுட்பமா அல்லது மூலதனச் செறிவுத் தொழில்நுட்பமா) என்பதைத் தீர்மானித்தல்.'],'How to produce?'],
+['👥','3. யாருக்காக உற்பத்தி செய்வது?',['உற்பத்தி செய்யப்பட்ட பண்டங்களும் சேவைகளும் சமூகத்தில் உள்ள பல்வேறு வருமானக் குழுக்களிடையே அல்லது நுகர்வோரிடையே எவ்வாறு பகிர்ந்தளிக்கப்பட வேண்டும் என்பதைத் தீர்மானித்தல்.'],'For whom to produce?']]},
+{t:'2. உற்பத்திக் காரணிகளும் அவற்றிற்கான கொடுப்பனவுகளும்',tb:1,cw:[17,33,28,22],h:['உற்பத்திக் காரணி','வரைவிலக்கணம் / விளக்கம்','உதாரணங்கள்','காரணிக்குரிய கொடுப்பனவு'],r:[
+['🌍 1. நிலம் (Land)','இயற்கையினால் மனிதனுக்கு இலவசமாகக் கிடைத்துள்ள அனைத்து இயற்கை வளங்களும்.','நிலப்பரப்பு, நீர், காடுகள், கனிமப் பொருட்கள், வளிமண்டலம்.','🏠 வாடகை (Rent)'],
+['💪 2. உழைப்பு (Labour)','உற்பத்தி நடவடிக்கைகளுக்காக மனிதன் வெளிப்படுத்தும் உடல் ரீதியான மற்றும் மன ரீதியான உழைப்பு.','தொழிலாளர்கள், ஆசிரியர்கள், மருத்துவர்கள், பொறியியலாளர்கள்.','💵 கூலி / ஊதியம் (Wages)'],
+['⚙️ 3. மூலதனம் (Capital)','உற்பத்தி நடவடிக்கைகளை இலகுவாக்குவதற்காக மனிதனால் உருவாக்கப்பட்ட கருவிகள் மற்றும் சாதனங்கள்.','இயந்திரங்கள், கட்டடங்கள், உபகரணங்கள், தொழிற்சாலைகள்.','🏦 வட்டி (Interest)'],
+['💡 4. முயற்சி / தொழில்முனைவு (Enterprise)','ஏனைய மூவகை உற்பத்திக் காரணிகளையும் ஒன்றுதிரட்டி, இடர்களை ஏற்று உற்பத்தியை மேற்கொள்ளும் நடவடிக்கை.','தொழிலதிபர்கள், வியாபார அமைப்பாளர்கள், நிறுவன நிறுவனர்கள்.','📈 இலாபம் (Profit)']]},
+{t:'3. பிரதான பொருளாதார நடவடிக்கைகள்',cls:'fl',arrow:1,it:[
+['🏭','1. உற்பத்தி (Production)',['மனிதத் தேவைகளையும் விருப்பங்களையும் பூர்த்தி செய்யக்கூடிய வகையில் பண்டங்களையும் சேவைகளையும் உருவாக்கும் நடவடிக்கையாகும்.'],'பண்டங்களையும் சேவைகளையும் உருவாக்கல்'],
+['🚚','2. விநியோகம் / வர்த்தகம்',['உற்பத்தி செய்யப்பட்ட பண்டங்களையும் சேவைகளையும் உற்பத்தியாளரிடமிருந்து நுகர்வோருக்குக் கொண்டு சேர்க்கும் நடவடிக்கையாகும்.','இதில் மொத்த விற்பனை (Wholesale) மற்றும் சில்லறை விற்பனை (Retail) உள்ளடங்கும்.'],'உற்பத்தியாளர் ➜ நுகர்வோர்'],
+['🛒','3. நுகர்வு (Consumption)',['பண்டங்கள் மற்றும் சேவைகளைப் பயன்படுத்துவதன் மூலம் மனிதன் தனது தேவைகளையும் விருப்பங்களையும் நேரடியாகப் பூர்த்தி செய்து கொள்ளும் நடவடிக்கையாகும்.','இவற்றை நுகரும் தனிநபர்கள் “நுகர்வோர்” எனப்படுவர்.'],'தேவைகளையும் விருப்பங்களையும் பூர்த்தி செய்தல்']]},
+{t:'4. பிரதான பொருளாதார முறைமைகளின் ஒப்பீடு',tb:1,cw:[16,28,28,28],h:['ஒப்பீட்டு அம்சம்','🏪 முதலாளித்துவ / சந்தைப் பொருளாதாரம்','🏛️ சமதர்ம / திட்டமிட்ட பொருளாதாரம்','⚖️ கலப்புப் பொருளாதாரம்'],r:[
+['சொத்துடைமை','உற்பத்திச் சாதனங்கள் தனியார் வசமிருக்கும் (Private Ownership).','உற்பத்திச் சாதனங்கள் அனைத்தும் அரசுடைமையாக்கப்பட்டிருக்கும் (State Ownership).','அரசு மற்றும் தனியார் ஆகிய இரு துறையினரிடமும் காணப்படும்.'],
+['தீர்மானம் எடுத்தல்','சந்தைச் சக்திகளான தேவை, விநியோகம் மற்றும் விலை முறைமை தீர்மானிக்கும்.','மத்திய திட்டமிடல் சபை (Central Planning Authority) தீர்மானிக்கும்.','சந்தை முறைமையும் அரசுத் தலையீடும் இணைந்து தீர்மானிக்கும்.'],
+['பிரதான நோக்கம்','தனிநபர் இலாபத்தை அதிகரித்தல் (Profit Motive).','சமூக நலனைப் பேணுதல் (Social Welfare).','இலாப நோக்கமும் சமூக நலனும் இணைந்து பேணப்படும்.'],
+['அரசின் பங்கு','அரசின் தலையீடு மிகக் குறைவாக அல்லது இல்லாதிருக்கும்.','முழுப் பொருளாதாரத்தையும் அரசே கட்டுப்படுத்தி நிர்வகிக்கும்.','அத்தியாவசியச் சேவைகளிலும் கட்டுப்பாடுகளிலும் அரசே தலையிடும்.'],
+['உதாரண நாடுகள்','சிங்கப்பூர், தென்கொரியா, தாய்வான், ஹொங்கொங்.','வடகொரியா, கியூபா (முன்னர் சோவியத் ஒன்றியம், சீனா).','இலங்கை, இந்தியா உட்பட பல உலக நாடுகள்.']]},
+{t:'4. நிலைமாறும் பொருளாதாரம் (Transition Economy)',mm:{cols:1,c:['🔄','நிலைமாறும் பொருளாதாரம்','Transition Economy',['விளக்கம்: சமதர்ம / திட்டமிட்ட பொருளாதார முறைமையிலிருந்து படிப்படியாகச் சந்தைப் பொருளாதார முறைமைக்குக் கட்டமைப்புகளை மாற்றி அமைக்கும் பொருளாதார நிலைமையாகும்.']],
+l:[
+[-1,'🏭','A. அரச நிறுவனங்களைத் தனியார்மயப்படுத்துதல்',['நஷ்டத்தில் இயங்கும் அரச நிறுவனங்களைத் தனியார்மயப்படுத்துதல்.']],
+[-1,'🏠','B. தனியார் சொத்துடைமைக்கு அனுமதி',['தனியார் சொத்துடைமைக்கு அனுமதி அளித்தல்.']],
+[-1,'🚀','C. தனியார் துறையை ஊக்குவித்தல்',['தனியார் துறை நடவடிக்கைகளை ஊக்குவித்தல்.']],
+[-1,'🔓','D. அரசுக் கட்டுப்பாடுகளைத் தளர்த்துதல்',['அரசுக் கட்டுப்பாடுகளைத் தளர்த்துதல் (பொருளாதாரத் தாராளமயமாக்கல்).']],
+[-1,'🌍','உதாரண நாடுகள்',['செக் குடியரசு, போலந்து, ருமேனியா, பல்கேரியா','(முன்னைய சோவியத் ஒன்றியத்துடன் இணைந்திருந்த நாடுகள்)']]]}},
+{t:'5. காலக்கோடு: இலங்கையின் பொருளாதாரக் கொள்கை மாற்றங்கள்',cls:'tm',arrow:1,br:[2],it:[
+['🔒','1948 – 1977',['கட்டுப்பாட்டுப் பொருளாதாரக் காலம்','இறக்குமதிப் பிரதியீட்டுக் கொள்கை பின்பற்றப்பட்டமை','உள்நாட்டு உற்பத்திகளுக்கு முன்னுரிமையளிக்கப்பட்டு, கடுமையான இறக்குமதிக் கட்டுப்பாடுகள் நிலவியமை','பல தொழிலதிபர் நிறுவனங்கள் அரசுடைமையாக்கப்பட்டமை'],'மூடிய / கட்டுப்பாட்டுப் பொருளாதாரம்'],
+['🔓','1977',['திறந்த பொருளாதாரக் கொள்கை அறிமுகம் (Open Economy)','வர்த்தகம் மற்றும் முதலீடுகளுக்கான கட்டுப்பாடுகள் தளர்த்தப்பட்டமை','வெளிநாட்டு முதலீடுகள் (FDI) ஊக்குவிக்கப்பட்டமை; ஏற்றுமதிச் செயலாக்க வலயங்கள் (EPZ) உருவாக்கப்பட்டமை','தனியார் துறையின் பங்கு விரிவடைந்தமை'],'திறந்த பொருளாதாரக் கொள்கை'],
+['🏢','2004 – தற்காலம்',['அரச நிறுவனங்களைத் தனியார்மயமாக்கும் செயற்திட்டம் கைவிடப்பட்டமை','ஏற்கனவே தனியார்மயமாக்கப்பட்ட சில நிறுவனங்கள் மீள அரசுடைமையாக்கப்பட்டமை','எ.கா: ஸ்ரீலங்கன் எயர்லைன்ஸ், செவன்ஹகல சர்க்கரை நிறுவனம், கொழும்பு மிஸினறி லிமிடெட் (லித்ரோ)'],'அரச நிறுவனங்கள் மீள அரசுடைமை'],
+['🌾','2004 – தற்காலம்',['உள்ளூர் விவசாயத்திற்கு முன்னுரிமையளித்தல்','உர மானியம்','நெல் சந்தைப்படுத்தல் சபை மீளமைத்தல்','“நாம் பயிரிடுவோம் நாட்டை கட்டியெழுப்புவோம்” திட்டம்'],'உள்ளூர் விவசாயத்துக்கு முன்னுரிமை'],
+['🛣️','2004 – தற்காலம்',['பெருமளவிலான உள்கட்டமைப்பு அபிவிருத்தி','அதிவேக நெடுஞ்சாலைகள்','கொழும்புத் துறைமுக விரிவாக்கம்','மத்தள விமான நிலையம்'],'உள்கட்டமைப்பு அபிவிருத்தி'],
+['🤝','2004 – தற்காலம்',['வறுமை ஒழிப்புத் திட்டங்கள் (சமுர்த்தி)','தகவல் தொழில்நுட்பத் துறை மேம்பாடு'],'வறுமை ஒழிப்பு · தகவல் தொழில்நுட்பம்']]},
+{t:'6. நிலைபேறான அபிவிருத்தி: 6 பரிமாணங்கள்',mm:{cols:1,c:['🌱','அபிவிருத்தி (Development)','பொருளாதார வளர்ச்சி மட்டுமல்ல',['அபிவிருத்தி என்பது வெறும் பொருளாதார வளர்ச்சியை மட்டும் குறிப்பதல்ல.','அது தனிமனித, சமூக, கலாசார மற்றும் சுற்றுச்சூழல் பரிமாணங்களைக் கொண்டது.']],
+l:[
+[-1,'💰','1. பொருளாதார அபிவிருத்தி',['தேசிய உற்பத்தி, வருமானம் மற்றும் மக்களின் நுகர்வு மட்டம் அதிகரித்தல்.'],0,0,'உற்பத்தி · வருமானம் · நுகர்வு'],
+[-1,'🧠','2. தனிமனித அபிவிருத்தி',['தனிநபரின் அறிவு, திறன்கள், ஆரோக்கியம் மற்றும் ஆளுமை மேம்படுதல்.'],0,0,'அறிவு · திறன் · ஆளுமை'],
+[-1,'🎨','3. பண்பாட்டு அபிவிருத்தி',['கலை, கலாசாரம், பாரம்பரிய விழுமியங்கள் மற்றும் மொழியைப் பேணி வளர்த்தல்.'],0,0,'கலை · கலாசாரம் · மொழி'],
+[-1,'🏥','4. சமூக அபிவிருத்தி',['சுகாதார, கல்வி, வீடமைப்பு வசதிகள் மற்றும் சமூக நீதி மேம்படுதல்.'],0,0,'சுகாதாரம் · கல்வி · வீடமைப்பு'],
+[-1,'🤲','5. ஒழுக்க அபிவிருத்தி',['நற்பண்புகள், நேர்மை, மனிதநேயம் மற்றும் சமூகப் பொறுப்புணர்வு வளர்தல்.'],0,0,'நற்பண்பு · நேர்மை · மனிதநேயம்'],
+[-1,'♻️','6. நிலையான / நிலைபேறான அபிவிருத்தி',['எதிர்காலச் சந்ததியினரின் தேவைகளைப் பாதிப்படையச் செய்யாமல் தற்போதைய தேவைகளைப் பூர்த்தி செய்தல்.'],0,0,'எதிர்காலச் சந்ததிக்காகவும்']]}},
+{t:'7. தொழில்நுட்ப முன்னேற்றமும் உலகமயமாதலும்',mm:{cols:1,c:['🌐','உலகமயமாதல் (Globalization)','ஒரே பொருளாதார, சமூக அலகு',['அறிவியல் மற்றும் தொழில்நுட்ப வளர்ச்சியின் காரணமாக உலக நாடுகள் அனைத்தும் எல்லைகளற்ற வகையில் ஒரே பொருளாதார மற்றும் சமூக அலகாக ஒருங்கிணைவதாகும்.']],
+l:[
+[-1,'🏢','பன்னாட்டு நிறுவனங்கள் (MNCs)',['உலகளாவிய ரீதியில் பல நாடுகளில் கிளைகளை நிறுவி வர்த்தகம் செய்தல்.'],0,0,'Multinational Corporations'],
+[-1,'🚢','சுதந்திர வர்த்தகம் (Free Trade)',['நாடுகளுக்கு இடையிலான வர்த்தகத் தடைகள் மற்றும் வரிகள் நீக்கப்படல்.'],0,0,'தடைகளும் வரிகளும் நீக்கம்'],
+[-1,'🏦','நிதி மற்றும் மூலதனப் பாய்வு',['சர்வதேச நிதி நிறுவனங்களான உலக வங்கி (World Bank), சர்வதேச நாணய நிதியம் (IMF), ஆசிய அபிவிருத்தி வங்கி (ADB) ஆகியவற்றின் செல்வாக்கு அதிகரித்தல்.'],0,0,'World Bank · IMF · ADB'],
+[-1,'💻','தொழில்நுட்பப் புரட்சி',['கணினி, இணையம், தொலைத்தொடர்பு மற்றும் நவீன இயந்திரங்களின் பயன்பாடு உலகளாவிய ரீதியில் பரவுதல்.'],0,0,'கணினி · இணையம் · தொலைத்தொடர்பு']]}},
+{t:'ஒப்பீடு: உலகமயமாதலின் சாதகம் × பாதகம்',tb:1,pair:1,cw:[50,50],h:['✅ சாதகமான விளைவுகள் (Positive Impacts)','⚠️ பாதகமான விளைவுகள் (Negative Impacts)'],r:[
+['புதிய தொழில்நுட்பங்கள்: நவீன அறிவியல் கருவிகள் மற்றும் உற்பத்தி முறைகள் இலகுவாகக் கிடைத்தல்.','உள்ளூர் தொழிற்துறைகள் பாதிப்பு: வெளிநாட்டுப் பொருட்களின் வருகையால் உள்ளூர் உற்பத்தியாளர்கள் போட்டியிட முடியாமல் போதல்.'],
+['முதலீடுகள் & வேலைவாய்ப்பு: வெளிநாட்டு நேரடி முதலீடுகள் (FDI) அதிகரித்து புதிய வேலைவாய்ப்புகள் உருவாகுதல்.','நுகர்வோர் கலாசாரம்: ஆடம்பரப் பொருட்களின் பயன்பாடு அதிகரித்து சீரற்ற நுகர்வுப் பழக்கம் தோன்றும் நிலை.'],
+['சர்வதேசச் சந்தை வாய்ப்பு: உள்நாட்டுப் பொருட்களை உலக நாடுகளுக்கு ஏற்றுமதி செய்யும் வாய்ப்பு விரிவடைதல்.','சுற்றுச்சூழல் பாதிப்பு: கட்டுப்பாடற்ற தொழிற்சாலைகளால் சூழல் மாசடைதலும் இயற்கை வளங்கள் சுரண்டப்படுதலும்.'],
+['தகவல் பரிமாற்றம்: உலக நிகழ்வுகளையும் தகவல்களையும் நொடிப்பொழுதில் அறிந்து கொள்ள முடிதல்.','கலாசாரச் சீரழிவு: பாரம்பரியப் பண்பாட்டு விழுமியங்கள் நலிவடைந்து மேற்கத்தேய கலாசார ஆதிக்கம் அதிகரித்தல்.']]}
+];
+var n=0,seen={};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function mmGet(s,k){var m=s.mm;if(k=='c')return [m.c[0],m.c[1],m.c[3]];var l=m.l[k];return [l[1],l[2],l[3]]}
+function mmHtml(s){
+  var m=s.mm,L=m.l,cx=900,cy=360,nodes='',paths='',d=0,half=Math.ceil(L.length/2);
+  var cc=m.c[3]?' tile cn':' nd cn';
+  nodes+='<'+(m.c[3]?'button':'div')+' class="'+cc.trim()+(seen[n+'-c']?' seen':'')+'" data-k="c" style="--c:#F5B841;left:'+cx+'px;top:'+cy+'px;width:'+(m.c[3]?420:400)+'px;--d:0s"><span>'+m.c[0]+' '+m.c[1]+'</span>'+(m.c[2]?'<small>'+m.c[2]+' · தொடுங்கள்</small>':'')+'</'+(m.c[3]?'button':'div')+'>';
+  (m.b||[]).forEach(function(b,i){
+    paths+=path(cx,cy,b[2],b[3],b[4],.2);
+    nodes+='<div class="tile nd" style="--c:'+b[4]+';left:'+b[2]+'px;top:'+b[3]+'px;width:290px;font-size:26px;--d:'+(.25+i*.1)+'s">'+b[0]+' '+b[1]+'</div>';
+  });
+  L.forEach(function(l,i){
+    var x=l[4],y=l[5],c=COL[i%6],px=cx,py=cy;
+    if(m.cols){var left=i<half,idx=left?i:i-half,cnt=left?half:L.length-half;x=left?215:1585;y=360+(idx-(cnt-1)/2)*140}
+    if(l[0]>=0){px=m.b[l[0]][2];py=m.b[l[0]][3];c=m.b[l[0]][4]}
+    paths+=path(px,py,x,y,c,.4+i*.05);
+    nodes+='<button class="tile'+(seen[n+'-'+i]?' seen':'')+'" data-k="'+i+'" style="--c:'+c+';left:'+x+'px;top:'+y+'px;width:'+(m.cols?370:330)+'px;--d:'+(.4+i*.06).toFixed(2)+'s"><span>'+l[1]+' '+l[2]+'</span>'+(l[6]?'<small>'+l[6]+'</small>':'')+'</button>';
+  });
+  return '<div class="mm"><svg>'+paths+'</svg>'+nodes+'</div>';
+}
+function path(x1,y1,x2,y2,c,dl){var mx=(x1+x2)/2;return '<path d="M'+x1+' '+y1+' C'+mx+' '+y1+' '+mx+' '+y2+' '+x2+' '+y2+'" stroke="'+c+'" style="animation-delay:'+dl.toFixed(2)+'s"/>'}
+function show(i){
+  n=Math.max(0,Math.min(S.length-1,i));var s=S[n],h='',d=0,tot,hint='ஒவ்வொன்றையும் தொடுங்கள்';
+  $('t').textContent=s.t;
+  if(s.tb){
+    tot=s.r.length;hint='ஒரு வரிசையைத் தொடுங்கள்';
+    h='<table class="'+(s.pair?'pair ':'')+(s.ctr?'ctr':'')+'">'+(s.cw?'<colgroup>'+s.cw.map(function(w){return '<col style="width:'+w+'%">'}).join('')+'</colgroup>':'')+'<thead><tr>'+s.h.map(function(x){return '<th>'+esc(x)+'</th>'}).join('')+'</tr></thead><tbody>'+
+    s.r.map(function(r,i2){return '<tr data-r="'+i2+'" class="'+(seen[n+'-'+i2]?'seen':'')+'" style="--d:'+(0.15*i2+.2).toFixed(2)+'s">'+r.map(function(c){return '<td'+(c.indexOf('🌿')==0?' class="has"':'')+'>'+esc(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table>';
+  }else if(s.mm){
+    tot=s.mm.l.length+(s.mm.c[3]?1:0);hint='ஒவ்வொரு கிளையையும் தொடுங்கள்';h=mmHtml(s);
+  }else{
+    tot=s.it.length;
+    s.it.forEach(function(it,k){
+      h+='<button class="tile '+(s.cls||'')+(seen[n+'-'+k]?' seen':'')+'" style="--c:'+COL[k%6]+';--d:'+(d+=.1).toFixed(2)+'s" data-k="'+k+'"><span class="ic">'+it[0]+'</span>'+it[1]+(it[3]?'<small>'+it[3]+'</small>':'')+'</button>';
+      var brk=s.br&&s.br.indexOf(k)>-1;
+      if(k<tot-1&&!(s.arrow&&brk)&&((s.sep&&s.sep[k])||s.arrow))h+='<span class="sep" style="--d:'+(d+=.1).toFixed(2)+'s">'+(s.arrow?'➜':s.sep[k])+'</span>';
+      if(brk)h+='<span class="br"></span>';
+    });
+  }
+  $('g').innerHTML=h;
+  var c=0;for(var j=0;j<tot;j++)if(seen[n+'-'+j])c++;
+  if(s.mm&&s.mm.c[3]&&seen[n+'-c'])c++;
+  $('hint').textContent='👆 '+hint+' ('+c+'/'+tot+')';
+  var dots='';for(var q=0;q<S.length;q++)dots+='<i data-n="'+q+'"'+(q==n?' class="on"':'')+'></i>';
+  $('dots').innerHTML=dots;$('cnt').textContent=(n+1)+' / '+S.length;
+  $('bar').style.width=((n+1)/S.length*100)+'%';
+  $('pv').disabled=n==0;$('nx').disabled=n==S.length-1;
+}
+function open_(k,ic,name,lines,html){
+  seen[n+'-'+k]=1;
+  $('card').style.setProperty('--c',COL[(+k||0)%6]);
+  $('ci').textContent=ic;$('ch').textContent=name;
+  $('cl').innerHTML=lines.map(function(l,j){return '<li style="animation-delay:'+(j*.12)+'s">'+(html?l:esc(l))+'</li>'}).join('');
+  var len=lines.join('').length;
+  $('card').className=len>520?'xs':len>300?'sm':'';
+  $('pop').classList.add('show');
+}
+function close_(){$('pop').classList.remove('show');show(n)}
+$('g').addEventListener('click',function(e){
+  var b=e.target.closest('.tile'),r=e.target.closest('tr[data-r]'),s=S[n];
+  if(b&&b.dataset.k!==undefined){var k=b.dataset.k,it=s.mm?mmGet(s,k):s.it[k];if(it[2])open_(k,it[0],it[1],it[2],0)}
+  else if(r){var i=+r.dataset.r,row=s.r[i],nm,ls;
+    if(s.pair){nm=row[0].split(':')[0]+' × '+row[1].split(':')[0];ls=row.map(function(c,j){return '<b>'+esc(s.h[j])+'</b>: '+esc(c)})}
+    else{nm=row[0];ls=row.slice(1).map(function(c,j){return '<b>'+esc(s.h[j+1])+'</b>: '+esc(c)})}
+    open_(i,s.pair?'⚖️':'🔍',nm,ls,1)}
+});
+$('pop').addEventListener('click',function(e){if(e.target.id=='pop'||e.target.id=='x')close_()});
+$('pv').onclick=function(){show(n-1)};$('nx').onclick=function(){show(n+1)};
+$('dots').addEventListener('click',function(e){if(e.target.dataset.n)show(+e.target.dataset.n)});
+document.addEventListener('keydown',function(e){
+  if(e.key=='Escape')close_();
+  else if(!$('pop').classList.contains('show')){if(e.key=='ArrowRight')show(n+1);if(e.key=='ArrowLeft')show(n-1)}
+});
+var x0=null;
+document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(x0===null||$('pop').classList.contains('show'))return;
+  var dx=e.changedTouches[0].clientX-x0;x0=null;
+  if(Math.abs(dx)>70)show(n+(dx<0?1:-1));
+},{passive:true});
+function fit(){
+  var w=innerWidth,h=innerHeight,por=w/h<1,W=por?1080:1920,H=por?1920:1080,k=Math.min(w/W,h/H),cv=$('cv');
+  cv.style.width=W+'px';cv.style.height=H+'px';
+  cv.style.transform='translate('+(-W*k/2)+'px,'+(-H*k/2)+'px) scale('+k+')';
+}
+addEventListener('resize',fit);fit();
+show(0);
+</script>
+</body>
+</html>
